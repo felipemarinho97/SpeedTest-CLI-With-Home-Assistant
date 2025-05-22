@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM python:3.9-slim
+FROM python:3.9-slim as builder
 
 # Install speedtest-cli and required packages
 RUN apt-get update && apt-get install -y \
