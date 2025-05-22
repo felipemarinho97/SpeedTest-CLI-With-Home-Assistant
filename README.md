@@ -23,12 +23,18 @@ services:
     image: ghcr.io/felipemarinho97/speedtest-cli-with-home-assistant:master
     container_name: speedtest-ha
     environment:
-      - HA_SERVER=http://localhost:8123 # Replace with your Home Assistant URL
-      - HA_AUTH_KEY=my-token # Replace with your Home Assistant Long-Lived Access Token
-      - CRON_SCHEDULE=${CRON_SCHEDULE:-"*/60 * * * *"} # Default to every hour
-      - SENSOR_DOWNLOAD=${SENSOR_DOWNLOAD} # will be to sensor.speedtest_${SENSOR_DOWNLOAD}
-      - SENSOR_UPLOAD=${SENSOR_UPLOAD} # will be to sensor.speedtest_${SENSOR_UPLOAD}
-      - SENSOR_PING=${SENSOR_PING} # will be to sensor.speedtest_${SENSOR_PING}
+      # Replace with your Home Assistant URL
+      - HA_SERVER=http://localhost:8123
+      # Replace with your Home Assistant Long-Lived Access Token
+      - HA_AUTH_KEY=my-token
+      # Optional: Set the timezone (e.g., America/New_York)
+      - TZ=America/New_York
+      # Set cron schedule
+      - CRON_SCHEDULE=0 * * * *
+      # Optional: Set the sensor names (will be sensor.speedtest_<name>)
+      - SENSOR_DOWNLOAD=${SENSOR_DOWNLOAD}
+      - SENSOR_UPLOAD=${SENSOR_UPLOAD}
+      - SENSOR_PING=${SENSOR_PING}
       # - SPEEDTEST_SERVER_ID=
       # - INCLUDE_LTS=
     restart: unless-stopped
